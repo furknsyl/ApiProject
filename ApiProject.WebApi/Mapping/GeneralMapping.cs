@@ -1,4 +1,6 @@
 ﻿using ApiProject.WebApi.Dtos.ContactDtos;
+using ApiProject.WebApi.Dtos.FeatureDtos;
+using ApiProject.WebApi.Dtos.ProductDtos;
 using ApiProject.WebApi.Entities;
 using AutoMapper;
 
@@ -18,8 +20,8 @@ namespace ApiProject.WebApi.Mapping
             CreateMap<Message, UpdateMessageDto>().ReverseMap();
             CreateMap<Message, GetByIdMessageDto>().ReverseMap();
 
-            //CreateMap<Product, CreateProductDto>().ReverseMap();
-            //CreateMap<Product, ResultProductWithCategoryDto>().ForMember(x => x.CategoryName, y => y.MapFrom(z => z.Category.CategoryName)).ReverseMap();
+            CreateMap<Product, CreateProductDto>().ReverseMap();
+            CreateMap<Product, ResultProductWithCategoryDto>().ForMember(x => x.CategoryName, y => y.MapFrom(z => z.Category.CategoryName)).ReverseMap();
 
             //CreateMap<Notification, ResultNotificationDto>().ReverseMap();
             //CreateMap<Notification, CreateNotificationDto>().ReverseMap();
