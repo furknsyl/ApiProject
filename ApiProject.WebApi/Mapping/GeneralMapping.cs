@@ -8,6 +8,7 @@ using ApiProject.WebApi.Dtos.ReservationDtos;
 using ApiProject.WebApi.Dtos.CategoryDtos;
 using ApiProject.WebApi.Entities;
 using AutoMapper;
+using ApiProjeKampi.WebApi.Dtos.ProductDtos;
 
 namespace ApiProject.WebApi.Mapping
 {
@@ -27,6 +28,7 @@ namespace ApiProject.WebApi.Mapping
 
             CreateMap<Product, CreateProductDto>().ReverseMap();
             CreateMap<Product, ResultProductWithCategoryDto>().ForMember(x => x.CategoryName, y => y.MapFrom(z => z.Category.CategoryName)).ReverseMap();
+            CreateMap<Product, UpdateProductDto>().ReverseMap();
 
             CreateMap<Notification, ResultNotificationDto>().ReverseMap();
             CreateMap<Notification, CreateNotificationDto>().ReverseMap();

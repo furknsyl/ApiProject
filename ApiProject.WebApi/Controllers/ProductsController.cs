@@ -1,6 +1,7 @@
 ﻿using ApiProject.WebApi.Context;
 using ApiProject.WebApi.Dtos.ProductDtos;
 using ApiProject.WebApi.Entities;
+using ApiProjeKampi.WebApi.Dtos.ProductDtos;
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
@@ -76,6 +77,15 @@ namespace ApiProject.WebApi.Controllers
                 _context.SaveChanges();
                 return Ok("Ürün güncelleme işlemi başarılı");
             }
+        }
+
+        [HttpPut("UpdateProductWithCategory")]
+        public IActionResult UpdateProductWithCategory(UpdateProductDto updateProductDto)
+        {
+            var value = _mapper.Map<Product>(updateProductDto);
+            _context.Products.Update(value);
+            _context.SaveChanges();
+            return Ok("Güncelleme işlemi başarılı");
         }
 
         [HttpPost("CreateProductWithCategory")]
