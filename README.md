@@ -5,7 +5,7 @@ Proje boyunca sürdürülebilirlik, okunabilirlik ve ölçeklenebilirlik ön pla
 
 
 🏗️ Tech Stack
-
+---
 ASP.NET Core Web API
 
 ASP.NET Core MVC (UI)
@@ -25,7 +25,7 @@ RapidAPI
 OpenRouter
 
 🧑‍💼 Admin Capabilities
-
+---
 🧾 Ürün & Menü Yönetimi
 
 👨‍🍳 Şef & Hizmet Yönetimi
@@ -38,7 +38,7 @@ OpenRouter
 
 
 🤖 AI-Powered Features
-
+---
 Bu projenin en güçlü yanı, çoklu yapay zekâ entegrasyonları ile gerçek bir ürün deneyimi sunmasıdır:
 
 ✨ OpenAI
@@ -70,6 +70,8 @@ UI & içerik tarafında tasarımsal ve metinsel iyileştirmeler
 Kullanıcıya özel yemek ve tarif önerileri
 
 Projeye ait bazı görseller :
+--
+
 
 <img width="1918" height="739" alt="image" src="https://github.com/user-attachments/assets/8849bb3b-9694-407a-9511-c8997c98950f" />
 <img width="1920" height="876" alt="image" src="https://github.com/user-attachments/assets/fec7df5c-6115-47ce-914a-8436636fd313" />
@@ -82,11 +84,13 @@ Projeye ait bazı görseller :
 <img width="1920" height="874" alt="image" src="https://github.com/user-attachments/assets/c0537c3d-ec5c-4d39-8ffb-ab51af124039" />
 <img width="1920" height="882" alt="image" src="https://github.com/user-attachments/assets/e7db402d-4d62-41bc-a5f8-f809e43de9b8" />
 
-------------
+
+
 
 Admin Paneli
+---
 
-------------
+
 
 <img width="1920" height="874" alt="image" src="https://github.com/user-attachments/assets/aa0f3ad3-a53e-4a6b-83ba-6f098f41ed4e" />
 <img width="1920" height="882" alt="image" src="https://github.com/user-attachments/assets/5c866570-0a88-4133-9da8-1026190d23dc" />
