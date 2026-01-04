@@ -1,3 +1,76 @@
+Yumi, gerçek bir restoran senaryosu üzerinden geliştirilmiş, %100 API tabanlı, çok katmanlı ve yapay zekâ destekli modern bir Restaurant Management System’dir.
+Bu proje; sadece CRUD işlemleri yapan klasik bir API değil, gerçek hayatta kullanılan AI entegrasyonlarıyla zenginleştirilmiş profesyonel bir backend mimarisi sunar.
+
+Proje boyunca sürdürülebilirlik, okunabilirlik ve ölçeklenebilirlik ön planda tutulmuştur.
+
+
+🏗️ Tech Stack
+
+ASP.NET Core Web API
+
+ASP.NET Core MVC (UI)
+
+RESTful API
+
+SignalR
+
+OpenAI API
+
+Hugging Face Models
+
+Anthropic Claude
+
+RapidAPI
+
+OpenRouter
+
+🧑‍💼 Admin Capabilities
+
+🧾 Ürün & Menü Yönetimi
+
+👨‍🍳 Şef & Hizmet Yönetimi
+
+📅 Online Rezervasyon Yönetimi
+
+🖼️ Galeri & Vitrin Yönetimi
+
+💬 Müşteri Mesajları & AI Yanıtları
+
+
+🤖 AI-Powered Features
+
+Bu projenin en güçlü yanı, çoklu yapay zekâ entegrasyonları ile gerçek bir ürün deneyimi sunmasıdır:
+
+✨ OpenAI
+
+🍳 Malzemeye Göre Tarif Önerisi
+
+💬 Müşteri Mesajlarına Otomatik Yanıt
+
+⚡ SignalR ile Gerçek Zamanlı AI Chat Bot
+
+🍽️ Yemekler Hakkında İlginç & Kültürel Bilgiler
+
+🛡️ Hugging Face
+
+🚫 Toksik & Argo Mesaj Analizi
+
+Gelen mesajların içerik güvenliği analizi
+
+🎨 Anthropic Claude
+
+UI & içerik tarafında tasarımsal ve metinsel iyileştirmeler
+
+🍲 Smart Food Experiences
+
+📅 Tarihe Göre Günün Yemeği
+
+🧠 AI Recipe Bot
+
+Kullanıcıya özel yemek ve tarif önerileri
+
+Projeye ait bazı görseller :
+
 <img width="1918" height="739" alt="image" src="https://github.com/user-attachments/assets/8849bb3b-9694-407a-9511-c8997c98950f" />
 <img width="1920" height="876" alt="image" src="https://github.com/user-attachments/assets/fec7df5c-6115-47ce-914a-8436636fd313" />
 <img width="1919" height="881" alt="image" src="https://github.com/user-attachments/assets/a705da37-7fed-4a4b-baba-84973844910c" />
