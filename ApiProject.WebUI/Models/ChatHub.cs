@@ -8,7 +8,7 @@ namespace ApiProject.WebUI.Models
 {
     public class ChatHub : Hub
     {
-        private const string apiKey = "s2_3c465f4394994acfbfe02c36406699f4";
+        private const string apiKey = "";
 
         private const string modelGpt = "gpt-4o-mini";
 
