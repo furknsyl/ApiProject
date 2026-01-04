@@ -9,6 +9,7 @@ using ApiProject.WebApi.Dtos.CategoryDtos;
 using ApiProject.WebApi.Entities;
 using AutoMapper;
 using ApiProjeKampi.WebApi.Dtos.ProductDtos;
+using ApiProject.WebApi.Dtos.GroupReservationDtos;
 
 namespace ApiProject.WebApi.Mapping
 {
@@ -52,6 +53,11 @@ namespace ApiProject.WebApi.Mapping
             CreateMap<Image, CreateImageDto>().ReverseMap();
             CreateMap<Image, UpdateImageDto>().ReverseMap();
             CreateMap<Image, GetImageByIdDto>().ReverseMap();
+
+            CreateMap<GroupReservation, ResultGroupReservationDto>().ReverseMap();
+            CreateMap<GroupReservation, CreateGroupReservationDto>().ReverseMap();
+            CreateMap<GroupReservation, UpdateGroupReservationDto>().ReverseMap();
+            CreateMap<GroupReservation, GetGroupReservationByIdDto>().ReverseMap();
         }
     }
 }

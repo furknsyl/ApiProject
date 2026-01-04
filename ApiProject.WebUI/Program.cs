@@ -1,9 +1,18 @@
+using ApiProject.WebUI.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient();
+builder.Services.AddSignalR();
+builder.Services.AddHttpClient("routellm", client =>
+{
+    client.BaseAddress = new Uri("https://routellm.abacus.ai/v1/");
+    client.DefaultRequestHeaders.Accept.Add(
+        new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+});
 
 var app = builder.Build();
 
@@ -14,6 +23,9 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.MapHub<ChatHub>("/chathub");
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

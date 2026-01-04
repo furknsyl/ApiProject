@@ -1,0 +1,272 @@
+﻿@{
+    ViewData["Title"] = "SendChatWithAI";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    :root {
+        --bg: #ffffff;
+        --panel: #ffffff;
+        --border: #e6e8ef;
+        --text: #111827;
+        --muted: #6b7280;
+        --user: #2563eb;
+        --userText: #ffffff;
+        --bot: #f3f4f6;
+        --botText: #111827;
+        --shadow: 0 10px 24px rgba(17,24,39,.08);
+    }
+
+    .chat-wrap {
+        max-width: 1100px;
+        margin: auto;
+        padding: 18px
+    }
+
+    .chat-card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        overflow: hidden
+    }
+
+    .chat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border)
+    }
+
+    .chat-title strong {
+        font-size: 14px
+    }
+
+    .chat-title span {
+        font-size: 12px;
+        color: var(--muted)
+    }
+
+    .status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #22c55e;
+        display: inline-block;
+        margin-right: 6px
+    }
+
+    .chat-body {
+        height: 60vh;
+        overflow-y: auto;
+        padding: 16px;
+        background: #fff
+    }
+
+    .msg-row {
+        display: flex;
+        margin: 10px 0
+    }
+
+        .msg-row.user {
+            justify-content: flex-end
+        }
+
+        .msg-row.bot {
+            justify-content: flex-start
+        }
+
+    .bubble {
+        max-width: 80%;
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        white-space: pre-wrap
+    }
+
+        .bubble.user {
+            background: #2563eb;
+            color: #fff;
+            border-bottom-right-radius: 6px
+        }
+
+        .bubble.bot {
+            background: var(--bot);
+            border-bottom-left-radius: 6px
+        }
+
+    .meta {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 4px
+    }
+
+    .typing {
+        display: none;
+        font-size: 12px;
+        color: var(--muted);
+        padding: 8px 16px
+    }
+
+    .chat-footer {
+        border-top: 1px solid var(--border);
+        padding: 12px
+    }
+
+    .composer {
+        display: flex;
+        gap: 10px
+    }
+
+    textarea {
+        width: 100%;
+        resize: none;
+        border: 0;
+        outline: 0;
+        font-size: 14px
+    }
+
+    .input-wrap {
+        flex: 1;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 10px
+    }
+
+    .btn {
+        background: #2563eb;
+        color: #fff;
+        border: 0;
+        padding: 10px 16px;
+        border-radius: 12px;
+        cursor: pointer
+    }
+
+        .btn.secondary {
+            background: #fff;
+            color: #2563eb;
+            border: 1px solid var(--border)
+        }
+</style>
+
+<div class="chat-wrap">
+    <div class="chat-card">
+        <div class="chat-header">
+            <div class="chat-title">
+                <strong><span class="status-dot"></span>Yummy Chatbot</strong>
+                <span>Restoran mesajlarını yanıtlar</span>
+            </div>
+            <button id="clearBtn" class="btn secondary">Temizle</button>
+        </div>
+
+        <div id="chat" class="chat-body"></div>
+        <div id="typing" class="typing">Yazıyor...</div>
+
+        <div class="chat-footer">
+            <div class="composer">
+                <div class="input-wrap">
+                    <textarea id="messageInput" rows="1"
+                              placeholder="Mesaj yaz (Enter: Gönder)"></textarea>
+                </div>
+                <button id="sendBtn" class="btn">Gönder</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@@microsoft/signalr@8.0.0/dist/browser/signalr.min.js"></script>
+
+<script>
+    const chat = document.getElementById("chat");
+    const typing = document.getElementById("typing");
+    const input = document.getElementById("messageInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
+    let bufferBubble = null;
+
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chathub")
+        .withAutomaticReconnect()
+        .build();
+
+    function timeNow() {
+        return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function addMessage(role, text) {
+        const wrapper = document.createElement("div");
+        wrapper.style.display = "flex";
+        wrapper.style.flexDirection = "column";
+        wrapper.style.alignItems = role === "user" ? "flex-end" : "flex-start";
+
+        const row = document.createElement("div");
+        row.className = `msg-row ${role}`;
+
+        const bubble = document.createElement("div");
+        bubble.className = `bubble ${role}`;
+        bubble.textContent = text;
+
+        row.appendChild(bubble);
+        wrapper.appendChild(row);
+
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        meta.textContent = timeNow();
+        wrapper.appendChild(meta);
+
+        chat.appendChild(wrapper);
+        chat.scrollTop = chat.scrollHeight;
+        return bubble;
+    }
+
+    connection.on("ReceiveUserEcho", msg => {
+        addMessage("user", msg);
+    });
+
+    connection.on("ReceiveToken", token => {
+        typing.style.display = "block";
+        if (!bufferBubble) {
+            bufferBubble = addMessage("bot", "");
+        }
+        bufferBubble.textContent += token;
+        chat.scrollTop = chat.scrollHeight;
+    });
+
+    connection.on("CompleteMessage", () => {
+        typing.style.display = "none";
+        bufferBubble = null;
+    });
+
+    async function send() {
+        const text = input.value.trim();
+        if (!text) return;
+
+        input.value = "";
+        sendBtn.disabled = true;
+
+        try {
+            await connection.invoke("SendMessage", text);
+        } finally {
+            sendBtn.disabled = false;
+            input.focus();
+        }
+    }
+
+    clearBtn.onclick = () => {
+        chat.innerHTML = "";
+        typing.style.display = "none";
+    };
+
+    sendBtn.onclick = send;
+
+    input.addEventListener("keydown", e => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            send();
+        }
+    });
+
+    connection.start();
+</script>
